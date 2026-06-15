@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = "cle_secrete_magasin"
 
 db = mysql.connector.connect(
-    host="localhost", user="root", password="", database="magasin_informatique"
+    host="127.0.0.1", port="3306", user="root", password="", database="magasin_informatique"
 )
 
 @app.route("/")
