@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
 import hashlib
 
@@ -54,5 +54,61 @@ def client(id_client):
     produits = cursor.fetchall()
     return render_template("client.html", produits=produits)
 
+@app.route("/client/<int:id_client>/commander", methods=["GET", "POST"])
+def commander(id_client):
+    cursor = db.cursor(dictionary=True, buffered=True)
+
+    # --- GET Method: Show the ordering page ---
+    if request.method == "GET":
+        # Fetch products that actually have stock available
+        cursor.execute("SELECT id, nom, prix, stock FROM produits WHERE stock > 0")
+        produits = cursor.fetchall()
+        return render_template("commander.html", produits=produits, id_client=id_client)
+
+    # --- POST Method: Handle the form submission ---
+    if request.method == "POST":
+        id_produit = int(request.form["id_produit"])
+        quantite_demandee = int(request.form["quantite"])
+
+        # 1. Verify the product availability and stock level
+        cursor.execute("SELECT nom, stock FROM produits WHERE id = %s", (id_produit,))
+        produit = cursor.fetchone()
+
+        if not produit or produit["stock"] < quantite_demandee:
+            flash(f"Stock insuffisant. Seulement {produit['stock'] if produit else 0} restant(s).")
+            return redirect(url_for("commander", id_client=id_client))
+
+        try:
+            # 2. Create an order instance inside the 'commandes' table
+            cursor.execute(
+                "INSERT INTO commandes (id_client, date_commande) VALUES (%s, NOW())", 
+                (id_client,)
+            )
+            id_nouvelle_commande = cursor.lastrowid  # Retrieve the generated order ID
+
+            # 3. Add item breakdown details into 'details_commandes'
+            cursor.execute(
+                "INSERT INTO details_commandes (id_commande, id_product, quantite) VALUES (%s, %s, %s)",
+                (id_nouvelle_commande, id_produit, quantite_demandee)
+            )
+
+            # 4. Deduct the purchased stock quantity from the inventory
+            cursor.execute(
+                "UPDATE produits SET stock = stock - %s WHERE id = %s",
+                (quantite_demandee, id_produit)
+            )
+
+            # Commit everything safely to the database
+            db.commit()
+
+        except Exception as e:
+            db.rollback()  # Undo changes if anything fails
+            flash("Une erreur est survenue lors de l'enregistrement de votre commande.")
+            return redirect(url_for("commander", id_client=id_client))
+
+        # 5. Success! Send the user back to their dashboard space
+        return redirect(url_for("client", id_client=id_client))
+
+# This block is perfectly positioned at the absolute end
 if __name__ == "__main__":
     app.run(debug=True)
