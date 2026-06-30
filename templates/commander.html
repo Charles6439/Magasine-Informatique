@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Commander</title>
+</head>
+<body>
+    <h2>Commander</h2>
+    <a href="/client/{{ id_client }}">Retour à mon espace</a>
+    
+    <table border="1">
+        <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>Action</th>
+        </tr>
+        {% for produit in produits %}
+        <tr>
+            <td>{{ produit.nom }}</td>
+            <td>{{ produit.prix }} €</td>
+            <td>{{ produit.stock }}</td>
+            <td>
+                {% if produit.stock > 0 %}
+                <a href="/ajouter_panier/{{ id_client }}/{{ produit.id }}">Ajouter au panier</a>
+                {% else %}
+                Rupture de stock
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
