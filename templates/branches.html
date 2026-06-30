@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<main style="padding: 20px;">
+    <h1>Our Branches</h1>
+    <ul>
+        {% for branch in branches %}
+            <li>
+                <strong style="font-size: 1.2em;">{{ branch['branch_name'] }}</strong>
+                <br>
+                <img src="{{ url_for('static', filename='images/' + branch['image_filename']) }}" 
+                     alt="{{ branch['branch_name'] }}" style="width:300px; display:block; margin: 10px 0;">
+            </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}

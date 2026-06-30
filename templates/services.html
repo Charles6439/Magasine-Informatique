@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="content-container">
+    <section class="hero">
+        <h1>Our Professional Services</h1>
+        <p>Enterprise-grade security solutions designed for modern infrastructure.</p>
+    </section>
+
+    <section class="services-grid">
+        <div class="service-card">
+            <h3>Network Security</h3>
+            <img src="{{ url_for('static', filename='images/reseau.jpg') }}" alt="Network Security">
+            <p>Advanced firewall management and intrusion detection systems.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Cloud Security</h3>
+            <img src="{{ url_for('static', filename='images/cloud.jpg') }}" alt="Cloud Security">
+            <p>Comprehensive cloud infrastructure protection.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Cyber Defense</h3>
+            <img src="{{ url_for('static', filename='images/cyber.jpg') }}" alt="Cyber Defense">
+            <p>Proactive monitoring and threat mitigation.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Data Encryption</h3>
+            <img src="{{ url_for('static', filename='images/entreprise.jpg') }}" alt="Data Encryption">
+            <p>End-to-end protection for your sensitive corporate data.</p>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,190 @@
+:root{
+    --bleu-nuit:#061b3a;
+    --bleu:#0d6efd;
+    --bleu-clair:#06b6d4;
+    --gris:#f4f7fb;
+    --texte:#0f172a;
+    --bordure:#d9e2ef;
+}
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#ffffff;
+    color:var(--texte);
+}
+.navbar{
+    background:linear-gradient(90deg,#061b3a,#07162f);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 45px;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+.logo-zone img{height:55px;background:white;border-radius:8px;padding:4px}
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-weight:bold;
+    font-size:14px;
+    padding-bottom:6px;
+}
+nav a:hover{color:var(--bleu-clair);border-bottom:2px solid var(--bleu-clair)}
+main{min-height:80vh}.flash{width:90%;margin:15px auto;background:#eaf4ff;border-left:5px solid var(--bleu);padding:10px 20px;border-radius:8px}
+.hero{
+    min-height:430px;
+    background:linear-gradient(90deg,rgba(6,27,58,.95),rgba(6,27,58,.55)),url('/static/IMAGE/entreprise.jpg') center/cover;
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:60px;
+}
+.hero-text{max-width:560px}.hero h1{font-size:42px;margin:0 0 15px}.hero p{font-size:18px;line-height:1.6;margin-bottom:25px}
+.btn{
+    display:inline-block;
+    background:linear-gradient(90deg,#0d6efd,#06b6d4);
+    color:white;
+    text-decoration:none;
+    border:0;
+    padding:13px 22px;
+    border-radius:6px;
+    font-weight:bold;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+.section
+{
+    width:90%;
+    max-width:1150px;
+    margin:35px auto;
+    padding:25px
+}
+   
+    .section h1,.section h2
+{
+    text-align:center;
+    text-transform:uppercase;
+    color:var(--bleu-nuit);
+    margin-bottom:10px
+}
+        
+.section h1:after,.section h2:after
+{
+    content:"";
+    display:block;
+    width:55px;
+    height:4px;
+    background:var(--bleu-clair);
+    margin:12px auto;
+    border-radius:5px
+}
+.intro{
+    text-align:center;
+    color:#475569;
+    margin-bottom:35px
+}
+.card
+{
+    display:grid;
+    gap:24px
+}
+.three
+{
+    grid-template-columns:repeat(3,1fr)
+}
+.four
+{
+    grid-template-columns:repeat(4,1fr)
+}
+.card,.service-card{
+    background:white;
+    border:1px solid var(--bordure);
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(15,23,42,.06);
+    overflow:hidden;
+    transition:.2s
+}
+.card:hover,.service-card:hover{
+    transform:translateY(-4px)
+}
+.card img{
+    width:100%;
+    height:170px;
+    object-fit:cover
+}
+.card h3,.service-card h3{
+    text-transform:uppercase;
+    color:var(--bleu-nuit);
+    margin-bottom:5px
+}
+.card p,.service-card p{
+    color:#475569;
+    font-size:14px;
+    padding:0 15px 15px
+}
+.service-card{
+    padding:28px 18px
+}
+.icon{
+    width:68px;
+    height:68px;
+    background:linear-gradient(180deg,#0d6efd,#063d8f);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 15px;
+    font-size:30px
+}
+.stats{
+    margin-top:35px;
+    background:var(--bleu-nuit);
+    color:white;
+    border-radius:10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    text-align:center;
+    padding:25px
+}
+.stats div{
+    border-right:1px solid rgba(255,255,255,.25)
+}
+.stats div:last-child{
+    border:0
+}
+.stats strong{
+    display:block;
+    font-size:28px
+}
+.stats span{
+    font-size:13px
+}
+.title-row{
+    display:flex;
+    justify-content:space-between;
+
+}
+/* Professional Layout Styles */
+.content-container { padding: 40px 10%; }
+
+.hero { text-align: center; margin-bottom: 50px; }
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    background: #f4f7fb;
+    padding: 20px;
+    border-left: 5px solid #061b3a;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover { transform: translateY(-10px); }
